@@ -52,7 +52,12 @@ const Report = ({ tasks }) => {
 
     try {
       const [year, month] = selectedMonth.split('-');
-      const response = await axios.get(`${API_URL}/api/progress/report/${year}/${month}`);
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${API_URL}/api/progress/report/${year}/${month}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       
       if (response.data.success) {
         setReportData(response.data.data);

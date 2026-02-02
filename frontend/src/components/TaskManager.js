@@ -27,7 +27,12 @@ const TaskManager = ({ tasks, onTasksUpdate }) => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${API_URL}/api/tasks`, formData);
+      const token = localStorage.getItem('token');
+      const response = await axios.post(`${API_URL}/api/tasks`, formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       if (response.data.success) {
         setFormData({ name: '', description: '', category: '' });
         setShowForm(false);
@@ -42,7 +47,12 @@ const TaskManager = ({ tasks, onTasksUpdate }) => {
   const handleDelete = async (taskId) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
-        await axios.delete(`${API_URL}/api/tasks/${taskId}`);
+        const token = localStorage.getItem('token');
+        await axios.delete(`${API_URL}/api/tasks/${taskId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         onTasksUpdate();
       } catch (error) {
         alert('Failed to delete task');

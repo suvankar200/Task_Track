@@ -33,9 +33,13 @@ const TrackingGrid = ({ tasks }) => {
     try {
       const startDate = format(dates[0], 'yyyy-MM-dd');
       const endDate = format(dates[dates.length - 1], 'yyyy-MM-dd');
+      const token = localStorage.getItem('token');
 
       const response = await axios.get(`${API_URL}/api/progress`, {
-        params: { startDate, endDate }
+        params: { startDate, endDate },
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
 
       if (response.data.success) {
@@ -65,10 +69,15 @@ const TrackingGrid = ({ tasks }) => {
     });
 
     try {
+      const token = localStorage.getItem('token');
       await axios.post(`${API_URL}/api/progress`, {
         taskId,
         date: dateStr,
         completed: !currentValue
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
     } catch (error) {
       console.error('Error updating progress:', error);
