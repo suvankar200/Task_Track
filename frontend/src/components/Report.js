@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Bar, Line, Doughnut } from 'react-chartjs-2';
+
+const API_URL = process.env.REACT_APP_API_URL || '';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -50,7 +52,7 @@ const Report = ({ tasks }) => {
 
     try {
       const [year, month] = selectedMonth.split('-');
-      const response = await axios.get(`/api/progress/report/${year}/${month}`);
+      const response = await axios.get(`${API_URL}/api/progress/report/${year}/${month}`);
       
       if (response.data.success) {
         setReportData(response.data.data);

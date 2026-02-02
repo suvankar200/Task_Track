@@ -7,6 +7,8 @@ import TaskManager from './TaskManager';
 import Report from './Report';
 import './Dashboard.css';
 
+const API_URL = process.env.REACT_APP_API_URL || '';
+
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ const Dashboard = () => {
         return;
       }
       
-      const response = await axios.get('/api/tasks', {
+      const response = await axios.get(`${API_URL}/api/tasks`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

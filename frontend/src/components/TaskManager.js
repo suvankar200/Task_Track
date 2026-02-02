@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './TaskManager.css';
 
+const API_URL = process.env.REACT_APP_API_URL || '';
+
 const TaskManager = ({ tasks, onTasksUpdate }) => {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -25,7 +27,7 @@ const TaskManager = ({ tasks, onTasksUpdate }) => {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/tasks', formData);
+      const response = await axios.post(`${API_URL}/api/tasks`, formData);
       if (response.data.success) {
         setFormData({ name: '', description: '', category: '' });
         setShowForm(false);
@@ -40,7 +42,7 @@ const TaskManager = ({ tasks, onTasksUpdate }) => {
   const handleDelete = async (taskId) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
-        await axios.delete(`/api/tasks/${taskId}`);
+        await axios.delete(`${API_URL}/api/tasks/${taskId}`);
         onTasksUpdate();
       } catch (error) {
         alert('Failed to delete task');

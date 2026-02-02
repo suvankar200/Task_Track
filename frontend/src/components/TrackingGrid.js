@@ -3,6 +3,8 @@ import axios from 'axios';
 import { format, addDays } from 'date-fns';
 import './TrackingGrid.css';
 
+const API_URL = process.env.REACT_APP_API_URL || '';
+
 const TrackingGrid = ({ tasks }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [progressData, setProgressData] = useState({});
@@ -32,7 +34,7 @@ const TrackingGrid = ({ tasks }) => {
       const startDate = format(dates[0], 'yyyy-MM-dd');
       const endDate = format(dates[dates.length - 1], 'yyyy-MM-dd');
 
-      const response = await axios.get('/api/progress', {
+      const response = await axios.get(`${API_URL}/api/progress`, {
         params: { startDate, endDate }
       });
 
@@ -63,7 +65,7 @@ const TrackingGrid = ({ tasks }) => {
     });
 
     try {
-      await axios.post('/api/progress', {
+      await axios.post(`${API_URL}/api/progress`, {
         taskId,
         date: dateStr,
         completed: !currentValue
