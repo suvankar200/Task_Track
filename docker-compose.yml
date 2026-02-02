@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:6
+    container_name: trackguide-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: trackguide
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - trackguide-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: trackguide-backend
+    restart: unless-stopped
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongodb:27017/trackguide
+      - JWT_SECRET=${JWT_SECRET:-your_jwt_secret_change_in_production}
+      - NODE_ENV=production
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    networks:
+      - trackguide-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: trackguide-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - trackguide-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  trackguide-network:
+    driver: bridge

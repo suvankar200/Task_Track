@@ -1,0 +1,15 @@
+{
+  "name": "track-guide",
+  "version": "1.0.0",
+  "description": "Performance tracking website for multiple users",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "client": "cd frontend && npm start",
+    "install-all": "npm install && cd frontend && npm install"
+  },
+  "keywords": ["performance", "tracking", "multi-user"],
+  "author": "",
+  "license": "ISC"
+}
