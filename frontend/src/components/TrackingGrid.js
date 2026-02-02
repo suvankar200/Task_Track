@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, addDays } from 'date-fns';
+import { format, addDays } from 'date-fns';
 import './TrackingGrid.css';
 
 const TrackingGrid = ({ tasks }) => {
@@ -23,6 +23,7 @@ const TrackingGrid = ({ tasks }) => {
     if (tasks.length > 0) {
       fetchProgressData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDate, tasks]);
 
   const fetchProgressData = async () => {

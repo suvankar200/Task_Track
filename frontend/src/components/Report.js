@@ -41,6 +41,7 @@ const Report = ({ tasks }) => {
     if (tasks.length > 0) {
       fetchReport();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedMonth, tasks]);
 
   const fetchReport = async () => {
