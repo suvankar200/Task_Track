@@ -3,7 +3,7 @@ import axios from 'axios';
 import { format, addDays } from 'date-fns';
 import './TrackingGrid.css';
 
-const API_URL = process.env.REACT_APP_API_URL || '';
+const API_URL = process.env.REACT_APP_API_URL || 'https://task-track-otuw.onrender.com';
 
 const TrackingGrid = ({ tasks }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());

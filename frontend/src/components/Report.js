@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Bar, Line, Doughnut } from 'react-chartjs-2';
 
-const API_URL = process.env.REACT_APP_API_URL || '';
+const API_URL = process.env.REACT_APP_API_URL || 'https://task-track-otuw.onrender.com';
 import {
   Chart as ChartJS,
   CategoryScale,

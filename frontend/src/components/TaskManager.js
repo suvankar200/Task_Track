@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './TaskManager.css';
 
-const API_URL = process.env.REACT_APP_API_URL || '';
+const API_URL = process.env.REACT_APP_API_URL || 'https://task-track-otuw.onrender.com';
 
 const TaskManager = ({ tasks, onTasksUpdate }) => {
   const [showForm, setShowForm] = useState(false);

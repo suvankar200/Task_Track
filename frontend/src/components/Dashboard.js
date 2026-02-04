@@ -7,7 +7,7 @@ import TaskManager from './TaskManager';
 import Report from './Report';
 import './Dashboard.css';
 
-const API_URL = process.env.REACT_APP_API_URL || '';
+const API_URL = process.env.REACT_APP_API_URL || 'https://task-track-otuw.onrender.com';
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
