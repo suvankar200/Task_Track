@@ -8,12 +8,12 @@ dotenv.config();
 
 const app = express();
 
-// Middleware - CORS configuration
+// Middleware - CORS configuration (allow all origins for now)
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://task-track-ebon.vercel.app', 'https://task-track-git-main-suvankar-pramaniks-projects.vercel.app', 'https://task-track-o6rwx4ho6-suvankar-pramaniks-projects.vercel.app'],
+  origin: true,
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 
